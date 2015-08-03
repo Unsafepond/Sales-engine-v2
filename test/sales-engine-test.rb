@@ -8,8 +8,8 @@ class TestSalesEngine < Minitest::Test
     assert_equal CSV::Table, engine.parse("merchants.csv").class
   end
 
-  def test_we_can_parse_data_on_startup
+  def test_we_can_parse_invoice_data
     engine = SalesEngine.new("./data/fixtures")
-    assert_equal CSV::Table, engine.startup.class
+    assert_equal CSV::Table, engine.parse("invoices.csv").class
   end
 end
