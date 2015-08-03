@@ -6,7 +6,8 @@ class SalesEngine
   end
 
   def parse(file)
-    data = CSV.read "#{@path}/#{file}", headers: true, header_converters: :symbol
+    data = CSV.read "#{@path}/#{file}",
+    headers: true, header_converters: :symbol
     return data
   end
 
