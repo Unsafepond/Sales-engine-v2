@@ -15,8 +15,8 @@ class TestSalesEngine < Minitest::Test
 
   def test_merchant_repository_method_gives_merchants
     engine = SalesEngine.new("./data/fixtures")
-    assert_equal "Schroeder-Jerde",
-                 engine.merchant_repository.make_merchants.first.name
+    assert_equal "1",
+                 engine.merchant_repository.make_merchants.first.id
   end
 
   def test_invoice_repository_method_gives_merchants
