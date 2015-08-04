@@ -1,9 +1,10 @@
 require_relative 'merchant'
 class MerchantRepository
-  attr_reader :merchants
+  attr_reader :merchants, :all_merchants
 
   def initialize(csvtable)
     @merchants = csvtable
+    @all_merchants = make_merchants
   end
 
   def make_merchants
@@ -11,4 +12,47 @@ class MerchantRepository
       Merchant.new(row[:id], row[:name], row[:created_at], row[:updated_at])
     end
   end
+
+  def all
+    all_merchants
+  end
+
+  def random
+    all.sample
+  end
+
+  def find_by_id(id)
+    all.detect {|merchant| merchant.id == id}
+  end
+
+  def find_by_name(name)
+    all.detect {|merchant| merchant.name == name}
+  end
+
+  def find_by_created_at(date)
+    all.detect {|merchant| merchant.created_at == date}
+  end
+
+  def find_by_updated_at(date)
+    all.detect {|merchant| merchant.updated_at == date}
+  end
+
+  def find_all_by_id(id)
+    all.select {|merchant| merchant.id == id}
+  end
+
+  def find_all_by_name(name)
+    all.select {|merchant| merchant.name == name}
+  end
+
+  def find_all_by_created_at(date)
+    all.select {|merchant| merchant.created_at == date}
+  end
+
+  def find_all_by_updated_at(date)
+    all.select {|merchant| merchant.updated_at == date}
+  end
+
+
+
 end
