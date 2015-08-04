@@ -31,4 +31,10 @@ class TestSalesEngine < Minitest::Test
                  engine.invoice_item_repository.make_invoice_items.first.id
   end
 
+  def test_customer_repository_method_gives_merchants
+    engine = SalesEngine.new("./data/fixtures")
+    assert_equal "1",
+                 engine.customer_repository.make_customers.first.id
+  end
+
 end
