@@ -28,4 +28,10 @@ class MerchantRepository
   def find_by_name(name)
     all.detect {|merchant| merchant.name == name}
   end
+
+  def find_by_created_at(date)
+    all.detect {|merchant| merchant.created_at == date}
+  end
+
+
 end
