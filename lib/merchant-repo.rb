@@ -16,4 +16,8 @@ class MerchantRepository
   def all
     all_merchants
   end
+
+  def random
+    all.sample
+  end
 end
