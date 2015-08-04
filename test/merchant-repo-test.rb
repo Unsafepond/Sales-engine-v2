@@ -60,4 +60,11 @@ class TestMerchantRepository < Minitest::Test
     assert_equal Merchant, merch_repo.find_by_id("2").class
   end
 
+  def test_find_by_name_method
+    data = CSV.read "./data/fixtures/merchants.csv",
+    headers: true, header_converters: :symbol
+    merch_repo = MerchantRepository.new(data)
+    assert_equal Merchant, merch_repo.find_by_name("Schroeder-Jerde").class
+  end
+
 end

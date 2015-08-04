@@ -24,4 +24,8 @@ class MerchantRepository
   def find_by_id(id)
     all.detect {|merchant| merchant.id == id}
   end
+
+  def find_by_name(name)
+    all.detect {|merchant| merchant.name == name}
+  end
 end
