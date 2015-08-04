@@ -20,4 +20,8 @@ class MerchantRepository
   def random
     all.sample
   end
+
+  def find_by_id(id)
+    all.detect {|merchant| merchant.id == id}
+  end
 end
