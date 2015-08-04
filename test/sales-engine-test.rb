@@ -12,4 +12,12 @@ class TestSalesEngine < Minitest::Test
     engine = SalesEngine.new("./data/fixtures")
     assert_equal CSV::Table, engine.parse("invoices.csv").class
   end
+
+  def test_merchant_repository_method_gives_merchants
+    engine = SalesEngine.new("./data/fixtures")
+    assert_equal "Schroeder-Jerde",
+                 engine.merchant_repository.make_merchants.first.name
+  end
+
+
 end

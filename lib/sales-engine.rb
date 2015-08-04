@@ -18,6 +18,7 @@ class SalesEngine
 
   def initialize(path = "./data")
     @path = path
+    startup
   end
 
   def parse(file)
