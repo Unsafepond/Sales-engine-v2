@@ -81,4 +81,32 @@ class TestMerchantRepository < Minitest::Test
     assert_equal Merchant, merch_repo.find_by_updated_at("2012-03-27 14:53:59 UTC").class
   end
 
+  def test_find_all_by_id_method
+    data = CSV.read "./data/fixtures/merchants.csv",
+    headers: true, header_converters: :symbol
+    merch_repo = MerchantRepository.new(data)
+    assert_equal "Klein, Rempel and Jones", merch_repo.find_all_by_id("2").last.name
+  end
+
+  def test_find_all_by_name_method
+    data = CSV.read "./data/fixtures/merchants.csv",
+    headers: true, header_converters: :symbol
+    merch_repo = MerchantRepository.new(data)
+    assert_equal "1", merch_repo.find_all_by_name("Schroeder-Jerde").first.id
+  end
+
+  def test_find_all_by_created_at_method
+    data = CSV.read "./data/fixtures/merchants.csv",
+    headers: true, header_converters: :symbol
+    merch_repo = MerchantRepository.new(data)
+    assert_equal "Schroeder-Jerde", merch_repo.find_all_by_created_at("2012-03-27 14:53:59 UTC").first.name
+  end
+
+  def test_find_all_by_updated_at_method
+    data = CSV.read "./data/fixtures/merchants.csv",
+    headers: true, header_converters: :symbol
+    merch_repo = MerchantRepository.new(data)
+    assert_equal "Schroeder-Jerde", merch_repo.find_all_by_updated_at("2012-03-27 14:53:59 UTC").first.name
+  end
+
 end
