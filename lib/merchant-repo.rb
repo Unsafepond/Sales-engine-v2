@@ -33,5 +33,9 @@ class MerchantRepository
     all.detect {|merchant| merchant.created_at == date}
   end
 
+  def find_by_updated_at(date)
+    all.detect {|merchant| merchant.updated_at == date}
+  end
+
 
 end

@@ -74,4 +74,11 @@ class TestMerchantRepository < Minitest::Test
     assert_equal Merchant, merch_repo.find_by_created_at("2012-03-27 14:53:59 UTC").class
   end
 
+  def test_find_by_updated_at_method
+    data = CSV.read "./data/fixtures/merchants.csv",
+    headers: true, header_converters: :symbol
+    merch_repo = MerchantRepository.new(data)
+    assert_equal Merchant, merch_repo.find_by_updated_at("2012-03-27 14:53:59 UTC").class
+  end
+
 end
