@@ -1,5 +1,5 @@
 require_relative 'transaction'
-class TransactionRepo
+class TransactionRepository
   attr_reader :transactions
 
   def initialize(csvtable)

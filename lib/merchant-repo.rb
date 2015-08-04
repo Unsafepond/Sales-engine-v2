@@ -1,5 +1,5 @@
 require_relative 'merchant'
-class MerchantRepo
+class MerchantRepository
   attr_reader :merchants
 
   def initialize(csvtable)

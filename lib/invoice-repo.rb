@@ -1,5 +1,5 @@
 require_relative 'invoice'
-class InvoiceRepo
+class InvoiceRepository
   attr_reader :invoices
 
   def initialize(csvtable)

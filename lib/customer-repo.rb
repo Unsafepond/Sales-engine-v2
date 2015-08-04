@@ -1,5 +1,5 @@
 require_relative 'customer'
-class CustomerRepo
+class CustomerRepository
   attr_reader :customers
 
   def initialize(csvtable)
