@@ -131,4 +131,32 @@ class TestInvoice < Minitest::Test
                           i_repo)
     assert_equal 3, invoice.items.count
   end
+
+  def test_customer_returns_a_single_customer
+    engine = SalesEngine.new("./data/fixtures")
+    engine.startup
+    i_repo = engine.invoice_repository
+    invoice = Invoice.new("1",
+                          "1",
+                          "26",
+                          "shipped",
+                          "2012-03-25 09:54:09 UTC",
+                          "2012-03-25 09:54:09 UTC",
+                          i_repo)
+    assert_equal "Joey", invoice.customer.first_name
+  end
+
+  def test_invalid_customer_returns_nil
+    engine = SalesEngine.new("./data/fixtures")
+    engine.startup
+    i_repo = engine.invoice_repository
+    invoice = Invoice.new("1",
+                          "32",
+                          "26",
+                          "shipped",
+                          "2012-03-25 09:54:09 UTC",
+                          "2012-03-25 09:54:09 UTC",
+                          i_repo)
+    assert_equal nil, invoice.customer
+  end
 end
