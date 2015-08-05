@@ -11,7 +11,8 @@ class Invoice
                  merchant_id,
                  status,
                  created_at,
-                 updated_at)
+                 updated_at,
+                 invoice_repo = "")
 
     @id          = id
     @customer_id = customer_id

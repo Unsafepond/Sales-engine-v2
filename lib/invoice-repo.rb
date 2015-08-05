@@ -1,10 +1,11 @@
 require_relative 'invoice'
 class InvoiceRepository
-  attr_reader :invoices, :all_invoices
+  attr_reader :invoices, :all_invoices, :sales_engine
 
-  def initialize(csvtable)
+  def initialize(csvtable, sales_engine)
     @invoices = csvtable
     @all_invoices = make_invoices
+    @sales_engine = sales_engine
   end
 
   def make_invoices
@@ -14,7 +15,8 @@ class InvoiceRepository
                   row[:merchant_id],
                   row[:status],
                   row[:created_at],
-                  row[:updated_at])
+                  row[:updated_at],
+                  self)
     end
   end
 
