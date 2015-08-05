@@ -14,5 +14,3 @@ require './lib/invoice-item'
 require './lib/customer'
 require './lib/transaction'
 require './lib/item'
-
-
