@@ -29,14 +29,16 @@ class TestMerchantRepository < Minitest::Test
     data = CSV.read "./data/fixtures/merchants.csv",
     headers: true, header_converters: :symbol
     merch_repo = MerchantRepository.new(data)
-    assert_equal "2012-03-27 14:53:59 UTC", merch_repo.make_merchants.last.created_at
+    assert_equal "2012-03-27 14:53:59 UTC",
+                 merch_repo.make_merchants.last.created_at
   end
 
   def test_we_can_make_merchant_update_time_with_table
     data = CSV.read "./data/fixtures/merchants.csv",
     headers: true, header_converters: :symbol
     merch_repo = MerchantRepository.new(data)
-    assert_equal "2012-03-27 14:53:59 UTC", merch_repo.make_merchants.last.updated_at
+    assert_equal "2012-03-27 14:53:59 UTC",
+                 merch_repo.make_merchants.last.updated_at
   end
 
   def test_all_method
@@ -57,35 +59,38 @@ class TestMerchantRepository < Minitest::Test
     data = CSV.read "./data/fixtures/merchants.csv",
     headers: true, header_converters: :symbol
     merch_repo = MerchantRepository.new(data)
-    assert_equal Merchant, merch_repo.find_by_id("2").class
+    assert_equal "Schroeder-Jerde", merch_repo.find_by_id("1").name
   end
 
   def test_find_by_name_method
     data = CSV.read "./data/fixtures/merchants.csv",
     headers: true, header_converters: :symbol
     merch_repo = MerchantRepository.new(data)
-    assert_equal Merchant, merch_repo.find_by_name("Schroeder-Jerde").class
+    assert_equal "1", merch_repo.find_by_name("Schroeder-Jerde").id
   end
 
   def test_find_by_created_at_method
     data = CSV.read "./data/fixtures/merchants.csv",
     headers: true, header_converters: :symbol
     merch_repo = MerchantRepository.new(data)
-    assert_equal Merchant, merch_repo.find_by_created_at("2012-03-27 14:53:59 UTC").class
+    assert_equal "1",
+                 merch_repo.find_by_created_at("2012-03-27 14:53:59 UTC").id
   end
 
   def test_find_by_updated_at_method
     data = CSV.read "./data/fixtures/merchants.csv",
     headers: true, header_converters: :symbol
     merch_repo = MerchantRepository.new(data)
-    assert_equal Merchant, merch_repo.find_by_updated_at("2012-03-27 14:53:59 UTC").class
+    assert_equal "1",
+                 merch_repo.find_by_updated_at("2012-03-27 14:53:59 UTC").id
   end
 
   def test_find_all_by_id_method
     data = CSV.read "./data/fixtures/merchants.csv",
     headers: true, header_converters: :symbol
     merch_repo = MerchantRepository.new(data)
-    assert_equal "Klein, Rempel and Jones", merch_repo.find_all_by_id("2").last.name
+    assert_equal "Klein, Rempel and Jones",
+                 merch_repo.find_all_by_id("2").first.name
   end
 
   def test_find_all_by_name_method
@@ -99,14 +104,16 @@ class TestMerchantRepository < Minitest::Test
     data = CSV.read "./data/fixtures/merchants.csv",
     headers: true, header_converters: :symbol
     merch_repo = MerchantRepository.new(data)
-    assert_equal "Schroeder-Jerde", merch_repo.find_all_by_created_at("2012-03-27 14:53:59 UTC").first.name
+    assert_equal "1",
+          merch_repo.find_all_by_created_at("2012-03-27 14:53:59 UTC").first.id
   end
 
   def test_find_all_by_updated_at_method
     data = CSV.read "./data/fixtures/merchants.csv",
     headers: true, header_converters: :symbol
     merch_repo = MerchantRepository.new(data)
-    assert_equal "Schroeder-Jerde", merch_repo.find_all_by_updated_at("2012-03-27 14:53:59 UTC").first.name
+    assert_equal "1",
+    merch_repo.find_all_by_updated_at("2012-03-27 14:53:59 UTC").first.id
   end
 
 end

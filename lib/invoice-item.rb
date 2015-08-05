@@ -7,7 +7,13 @@ class InvoiceItem
               :created_at,
               :updated_at
 
-  def initialize(id, item_id, invoice_id, quantity, unit_price, created_at, updated_at)
+  def initialize(id,
+                 item_id,
+                 invoice_id,
+                 quantity,
+                 unit_price,
+                 created_at,
+                 updated_at)
     @id = id
     @item_id = item_id
     @invoice_id = invoice_id

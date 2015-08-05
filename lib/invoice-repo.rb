@@ -1,9 +1,10 @@
 require_relative 'invoice'
 class InvoiceRepository
-  attr_reader :invoices
+  attr_reader :invoices, :all_invoices
 
   def initialize(csvtable)
     @invoices = csvtable
+    @all_invoices = make_invoices
   end
 
   def make_invoices
@@ -16,4 +17,61 @@ class InvoiceRepository
                   row[:updated_at])
     end
   end
+
+  def all
+    all_invoices
+  end
+
+  def random
+    all.sample
+  end
+
+  def find_by_id(id)
+    all.detect {|invoice| invoice.id == id}
+  end
+
+  def find_by_customer_id(customer_id)
+    all.detect {|invoice| invoice.customer_id == customer_id}
+  end
+
+  def find_by_merchant_id(merchant_id)
+    all.detect {|invoice| invoice.merchant_id == merchant_id}
+  end
+
+  def find_by_status(status)
+    all.detect {|invoice| invoice.status == status}
+  end
+
+  def find_by_created_at(created_date)
+    all.detect {|invoice| invoice.created_at == created_date}
+  end
+
+  def find_by_updated_at(updated_date)
+    all.detect {|invoice| invoice.updated_at == updated_date}
+  end
+
+  def find_all_by_id(id)
+    all.select {|invoice| invoice.id == id}
+  end
+
+  def find_all_by_customer_id(customer_id)
+    all.select {|invoice| invoice.customer_id == customer_id}
+  end
+
+  def find_all_by_merchant_id(merchant_id)
+    all.select {|invoice| invoice.merchant_id == merchant_id}
+  end
+
+  def find_all_by_status(status)
+    all.select {|invoice| invoice.status == status}
+  end
+
+  def find_all_by_created_at(created_date)
+    all.select {|invoice| invoice.created_at == created_date}
+  end
+
+  def find_all_by_updated_at(updated_date)
+    all.select {|invoice| invoice.updated_at == updated_date}
+  end
+
 end
