@@ -9,7 +9,13 @@ class InvoiceItemRepository
 
   def make_invoice_items
     invoice_items.by_row.map do |row|
-      InvoiceItem.new(row[:id], row[:item_id], row[:invoice_id], row[:quantity], row[:unit_price], row[:created_at], row[:updated_at])
+      InvoiceItem.new(row[:id],
+                      row[:item_id],
+                      row[:invoice_id],
+                      row[:quantity],
+                      row[:unit_price],
+                      row[:created_at],
+                      row[:updated_at])
     end
   end
 
@@ -17,7 +23,7 @@ class InvoiceItemRepository
   	all_invoice_items
   end
 
-  def random 
+  def random
   	all_invoice_items.sample
   end
 
