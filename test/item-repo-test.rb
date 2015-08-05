@@ -29,7 +29,8 @@ class TestItemRepository < Minitest::Test
     data = CSV.read "./data/fixtures/items.csv",
     headers: true, header_converters: :symbol
     item_repo = ItemRepository.new(data)
-    assert_equal "Nihil autem sit odio inventore deleniti.", item_repo.make_items.first.description
+    assert_equal "Nihil autem sit odio inventore deleniti.",
+                 item_repo.make_items.first.description
   end
 
   def test_we_can_make_item_unit_price_with_table
