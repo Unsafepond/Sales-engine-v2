@@ -101,7 +101,7 @@ class TestInvoice < Minitest::Test
                           "2012-03-25 09:54:09 UTC",
                           "2012-03-25 09:54:09 UTC",
                           i_repo)
-    assert_equal 2, invoice.invoice_items.count
+    assert_equal 3, invoice.invoice_items.count
   end
 
   def test_invoice_items_method_returns_empty_array_if_no_matches
@@ -116,5 +116,19 @@ class TestInvoice < Minitest::Test
                           "2012-03-25 09:54:09 UTC",
                           i_repo)
     assert_equal [], invoice.invoice_items
+  end
+
+  def test_items_returns_list_of_items
+    engine = SalesEngine.new("./data/fixtures")
+    engine.startup
+    i_repo = engine.invoice_repository
+    invoice = Invoice.new("1",
+                          "1",
+                          "26",
+                          "shipped",
+                          "2012-03-25 09:54:09 UTC",
+                          "2012-03-25 09:54:09 UTC",
+                          i_repo)
+    assert_equal 3, invoice.items.count
   end
 end
