@@ -57,7 +57,4 @@ class MerchantRepository
   def find_all_by_updated_at(date)
     all.select {|merchant| merchant.updated_at == date}
   end
-
-
-
 end

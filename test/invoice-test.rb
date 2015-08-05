@@ -159,4 +159,33 @@ class TestInvoice < Minitest::Test
                           i_repo)
     assert_equal nil, invoice.customer
   end
+
+  def test_merchant_method_returns_merchant
+    engine = SalesEngine.new("./data/fixtures")
+    engine.startup
+    i_repo = engine.invoice_repository
+    invoice = Invoice.new("1",
+                          "1",
+                          "2",
+                          "shipped",
+                          "2012-03-25 09:54:09 UTC",
+                          "2012-03-25 09:54:09 UTC",
+                          i_repo)
+    assert_equal "Klein, Rempel and Jones", invoice.merchant.name
+  end
+
+  def test_merchant_method_with_no_match_returns_nil
+    engine = SalesEngine.new("./data/fixtures")
+    engine.startup
+    i_repo = engine.invoice_repository
+    invoice = Invoice.new("1",
+                          "1",
+                          "35",
+                          "shipped",
+                          "2012-03-25 09:54:09 UTC",
+                          "2012-03-25 09:54:09 UTC",
+                          i_repo)
+    assert_equal nil, invoice.merchant
+  end
+
 end
