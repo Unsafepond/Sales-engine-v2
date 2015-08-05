@@ -1,15 +1,20 @@
 require_relative 'merchant'
 class MerchantRepository
-  attr_reader :merchants, :all_merchants
+  attr_reader :merchants, :all_merchants, :sales_engine
 
-  def initialize(csvtable)
+  def initialize(csvtable, sales_engine = "")
     @merchants = csvtable
     @all_merchants = make_merchants
+    @sales_engine = sales_engine
   end
 
   def make_merchants
     merchants.by_row.map do |row|
-      Merchant.new(row[:id], row[:name], row[:created_at], row[:updated_at])
+      Merchant.new(row[:id],
+                   row[:name],
+                   row[:created_at],
+                   row[:updated_at],
+                   self)
     end
   end
 

@@ -1,18 +1,19 @@
-require 'minitest/autorun'
-require 'minitest/pride'
-require './lib/merchant'
+# require 'minitest/autorun'
+# require 'minitest/pride'
+# require './lib/merchant'
+require_relative 'test_helper'
 
 class TestMerchant < Minitest::Test
   def test_merchant_has_id
-    merchant = Merchant.new(1,
+    merchant = Merchant.new("1",
                             "Joe",
                             "2012-03-27 14:53:59 UTC",
                             "2012-03-27 14:53:59 UTC")
-    assert_equal 1, merchant.id
+    assert_equal "1", merchant.id
   end
 
   def test_merchant_has_name
-    merchant = Merchant.new(1,
+    merchant = Merchant.new("1",
                             "Joe",
                             "2012-03-27 14:53:59 UTC",
                             "2012-03-27 14:53:59 UTC")
@@ -20,7 +21,7 @@ class TestMerchant < Minitest::Test
   end
 
   def test_merchant_has_creation_date
-    merchant = Merchant.new(1,
+    merchant = Merchant.new("1",
                             "Joe",
                             "2012-03-27 14:53:59 UTC",
                             "2012-03-27 14:53:59 UTC")
@@ -28,10 +29,34 @@ class TestMerchant < Minitest::Test
   end
 
   def test_merchant_has_updated_date
-    merchant = Merchant.new(1,
+    merchant = Merchant.new("1",
                             "Joe",
                             "2012-03-27 14:53:59 UTC",
                             "2012-03-27 14:53:59 UTC")
     assert_equal "2012-03-27 14:53:59 UTC", merchant.updated_at
+  end
+
+  def test_item_method_returns_list_of_items
+    engine = SalesEngine.new("./data/fixtures")
+    engine.startup
+    m_repo = engine.merchant_repository
+    merchant = Merchant.new("1",
+                            "Joe",
+                            "2012-03-27 14:53:59 UTC",
+                            "2012-03-27 14:53:59 UTC",
+                            m_repo)
+    assert_equal 4, merchant.items.count
+  end
+
+  def test_no_matches_returns_empty_array
+    engine = SalesEngine.new("./data/fixtures")
+    engine.startup
+    m_repo = engine.merchant_repository
+    merchant = Merchant.new("6",
+                            "Joe",
+                            "2012-03-27 14:53:59 UTC",
+                            "2012-03-27 14:53:59 UTC",
+                            m_repo)
+    assert_equal [], merchant.items
   end
 end

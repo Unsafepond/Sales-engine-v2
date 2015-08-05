@@ -1,0 +1,18 @@
+require 'csv'
+require 'minitest/autorun'
+require 'minitest/pride'
+require './lib/sales-engine'
+require './lib/merchant-repo'
+require './lib/invoice-repo'
+require './lib/invoice-item-repo'
+require './lib/customer-repo'
+require './lib/transaction-repo'
+require './lib/item-repo'
+require './lib/merchant'
+require './lib/invoice'
+require './lib/invoice-item'
+require './lib/customer'
+require './lib/transaction'
+require './lib/item'
+
+
