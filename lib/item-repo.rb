@@ -1,10 +1,11 @@
 require_relative 'item'
 class ItemRepository
-  attr_reader :item, :all_items
+  attr_reader :item, :all_items, :sales_engine
 
-  def initialize(csvtable)
+  def initialize(csvtable, sales_engine = "")
     @item = csvtable
     @all_items = make_items
+    @sales_engine = sales_engine
   end
 
   def make_items
@@ -15,7 +16,8 @@ class ItemRepository
                row[:unit_price],
                row[:merchant_id],
                row[:created_at],
-               row[:updated_at])
+               row[:updated_at],
+               self)
     end
   end
 

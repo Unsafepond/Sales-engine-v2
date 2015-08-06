@@ -1,6 +1,4 @@
-require 'minitest/autorun'
-require 'minitest/pride'
-require './lib/item'
+require_relative "test_helper"
 
 class TestItem < Minitest::Test
   def test_item_has_id
@@ -78,5 +76,35 @@ class TestItem < Minitest::Test
                     "2012-03-27 14:53:59 UTC",
                     "2012-03-27 14:53:59 UTC")
     assert_equal "2012-03-27 14:53:59 UTC", item.updated_at
+  end
+
+  def test_invoice_item_method
+    engine = SalesEngine.new("./data/fixtures")
+    engine.startup
+    i_repo = engine.item_repository
+    item = Item.new("1",
+                    "Item Qui Esse",
+                    "Nihil autem sit odio inventore deleniti.",
+                    "75107",
+                    "1",
+                    "2012-03-27 14:53:59 UTC",
+                    "2012-03-27 14:53:59 UTC",
+                    i_repo)
+    assert_equal 2, item.invoice_item.count
+  end
+
+  def test_merchant_method
+    engine = SalesEngine.new("./data/fixtures")
+    engine.startup
+    i_repo = engine.item_repository
+    item = Item.new("1",
+                    "Item Qui Esse",
+                    "Nihil autem sit odio inventore deleniti.",
+                    "75107",
+                    "1",
+                    "2012-03-27 14:53:59 UTC",
+                    "2012-03-27 14:53:59 UTC",
+                    i_repo)
+    assert_equal Merchant, item.merchant.class
   end
 end
