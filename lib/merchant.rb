@@ -41,6 +41,12 @@ class Merchant
     end
   end
 
+  def successful_invoice_items
+    successful_invoices.flat_map do |invoice|
+      sales_engine.invoice_item_repository.find_all_by_invoice_id(invoice.id)
+    end
+  end
+
   def revenue
 
   end
