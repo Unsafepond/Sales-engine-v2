@@ -107,4 +107,34 @@ class TestInvoiceItem < Minitest::Test
                                   i_i_repo)
     assert_equal nil, invoice_item.invoice
   end
+
+  def test_item_returns_a_single_item
+    engine = SalesEngine.new("./data/fixtures")
+    engine.startup
+    i_i_repo = engine.invoice_item_repository
+    invoice_item = InvoiceItem.new("1",
+                                  "528",
+                                  "1",
+                                  "3",
+                                  "2196",
+                                  "2012-03-27 14:54:09 UTC",
+                                  "2012-03-27 14:54:09 UTC",
+                                  i_i_repo)
+    assert_equal "Item Ea Voluptatum", invoice_item.item.name
+  end
+
+  def test_invoice_returns_nil_if_no_match
+    engine = SalesEngine.new("./data/fixtures")
+    engine.startup
+    i_i_repo = engine.invoice_item_repository
+    invoice_item = InvoiceItem.new("4",
+                                  "535",
+                                  "5",
+                                  "3",
+                                  "2196",
+                                  "2012-03-27 14:54:09 UTC",
+                                  "2012-03-27 14:54:09 UTC",
+                                  i_i_repo)
+    assert_equal nil, invoice_item.item
+  end
 end
