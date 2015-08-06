@@ -36,9 +36,9 @@ class SalesEngine
 
     @merchant_repository     = MerchantRepository.new(merchants, self)
     @invoice_repository      = InvoiceRepository.new(invoices, self)
-    @invoice_item_repository = InvoiceItemRepository.new(invoice_items)
+    @invoice_item_repository = InvoiceItemRepository.new(invoice_items, self)
     @customer_repository     = CustomerRepository.new(customers, self)
-    @transaction_repository  = TransactionRepository.new(transactions)
+    @transaction_repository  = TransactionRepository.new(transactions, self)
     @item_repository         = ItemRepository.new(items, self)
   end
 end
