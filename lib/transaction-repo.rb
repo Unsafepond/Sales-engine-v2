@@ -1,10 +1,11 @@
 require_relative 'transaction'
 class TransactionRepository
-  attr_reader :transactions, :all_transactions
+  attr_reader :transactions, :all_transactions, :sales_engine
 
-  def initialize(csvtable)
+  def initialize(csvtable, sales_engine = "")
     @transactions = csvtable
     @all_transactions = make_transactions
+    @sales_engine = sales_engine
   end
 
   def make_transactions

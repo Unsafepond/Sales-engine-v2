@@ -2,7 +2,7 @@ require_relative 'invoice-item'
 class InvoiceItemRepository
   attr_reader :invoice_items, :all_invoice_items, :sales_engine
 
-  def initialize(csvtable, sales_engine)
+  def initialize(csvtable, sales_engine = "")
     @invoice_items = csvtable
     @all_invoice_items = make_invoice_items
     @sales_engine = sales_engine
