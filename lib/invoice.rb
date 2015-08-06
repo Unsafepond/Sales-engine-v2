@@ -5,7 +5,7 @@ class Invoice
               :status,
               :created_at,
               :updated_at,
-              :invoice_repo
+              :invoice_repository
 
   def initialize(id,
                  customer_id,
@@ -13,7 +13,7 @@ class Invoice
                  status,
                  created_at,
                  updated_at,
-                 invoice_repo = "")
+                 invoice_repository = "")
 
     @id          = id
     @customer_id = customer_id
@@ -21,19 +21,15 @@ class Invoice
     @status      = status
     @created_at  = created_at
     @updated_at  = updated_at
-    @invoice_repo = invoice_repo
-  end
-
-  def sales_engine
-    invoice_repo.sales_engine
+    @invoice_repository = invoice_repository
   end
 
   def transactions
-    sales_engine.transaction_repository.find_all_by_invoice_id(id)
+    invoice_repository.find_all_transactions_by_invoice_id(id)
   end
 
   def invoice_items
-    sales_engine.invoice_item_repository.find_all_by_invoice_id(id)
+    invoice_repository.find_all_invoice_items_by_invoice_id(id)
   end
 
   def item_ids_from_invoice_items
@@ -42,15 +38,15 @@ class Invoice
 
   def items
     item_ids_from_invoice_items.flat_map do |id|
-      sales_engine.item_repository.find_all_by_id(id)
+      invoice_repository.find_all_items_by_item_id(id)
     end
   end
 
   def customer
-    sales_engine.customer_repository.find_by_id(customer_id)
+    invoice_repository.find_by_customer_id(customer_id)
   end
 
   def merchant
-    sales_engine.merchant_repository.find_by_id(merchant_id)
+    invoice_repository.find_by_merchant_id(merchant_id)
   end
 end

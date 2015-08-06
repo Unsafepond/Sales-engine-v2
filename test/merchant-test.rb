@@ -64,7 +64,7 @@ class TestMerchant < Minitest::Test
   def test_invoice_method_returns_list_of_invoices
     engine = SalesEngine.new("./data/fixtures")
     engine.startup
-    m_repo = engine.invoice_repository
+    m_repo = engine.merchant_repository
     merchant = Merchant.new("26",
                             "Joe",
                             "2012-03-27 14:53:59 UTC",

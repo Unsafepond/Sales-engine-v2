@@ -84,4 +84,12 @@ class InvoiceItemRepository
   def find_all_by_updated_at(date)
     all.select {|invoice_item| invoice_item.updated_at == date}
   end
+
+  def find_by_invoice_id(id)
+      sales_engine.find_by_invoice_id(id)
+  end
+
+  def find_by_item_id(id)
+    sales_engine.find_by_item_id(id)
+  end
 end

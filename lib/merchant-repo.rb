@@ -57,4 +57,12 @@ class MerchantRepository
   def find_all_by_updated_at(date)
     all.select {|merchant| merchant.updated_at == date}
   end
+
+  def find_all_items_by_merchant_id(id)
+    sales_engine.find_all_items_by_merchant_id(id)
+  end
+
+  def find_all_invoices_by_merchant_id(id)
+    sales_engine.find_all_invoices_by_merchant_id(id)
+  end
 end

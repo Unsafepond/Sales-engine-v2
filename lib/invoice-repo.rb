@@ -76,4 +76,24 @@ class InvoiceRepository
     all.select {|invoice| invoice.updated_at == updated_date}
   end
 
+  def find_all_transactions_by_invoice_id(id)
+    sales_engine.find_all_transactions_by_invoice_id(id)
+  end
+
+  def find_all_invoice_items_by_invoice_id(id)
+    sales_engine.find_all_invoice_items_by_invoice_id(id)
+  end
+
+  def find_all_items_by_item_id(id)
+    sales_engine.find_all_items_by_item_id(id)
+  end
+
+  def find_by_customer_id(id)
+    sales_engine.find_by_customer_id(id)
+  end
+
+  def find_by_merchant_id(id)
+    sales_engine.find_by_merchant_id(id)
+  end
+
 end
