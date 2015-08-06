@@ -93,6 +93,21 @@ class TestItem < Minitest::Test
     assert_equal 2, item.invoice_item.count
   end
 
+  def test_invoice_item_method_returns_empty_array_if_no_matches
+    engine = SalesEngine.new("./data/fixtures")
+    engine.startup
+    i_repo = engine.item_repository
+    item = Item.new("33",
+                    "Item Qui Esse",
+                    "Nihil autem sit odio inventore deleniti.",
+                    "75107",
+                    "1",
+                    "2012-03-27 14:53:59 UTC",
+                    "2012-03-27 14:53:59 UTC",
+                    i_repo)
+    assert_equal [], item.invoice_item
+  end
+
   def test_merchant_method
     engine = SalesEngine.new("./data/fixtures")
     engine.startup
@@ -106,5 +121,20 @@ class TestItem < Minitest::Test
                     "2012-03-27 14:53:59 UTC",
                     i_repo)
     assert_equal Merchant, item.merchant.class
+  end
+
+  def test_merchant_method_returns_nil_if_no_matches
+    engine = SalesEngine.new("./data/fixtures")
+    engine.startup
+    i_repo = engine.item_repository
+    item = Item.new("1",
+                    "Item Qui Esse",
+                    "Nihil autem sit odio inventore deleniti.",
+                    "75107",
+                    "69",
+                    "2012-03-27 14:53:59 UTC",
+                    "2012-03-27 14:53:59 UTC",
+                    i_repo)
+    assert_equal nil, item.merchant
   end
 end

@@ -46,7 +46,7 @@ class TestCustomer < Minitest::Test
     assert_equal "2012-03-27 14:54:09 UTC", customer.updated_at
   end
 
-  def test_invoice_method_with_no_matches_returns_empty_array
+  def test_invoices_method
     engine = SalesEngine.new("./data/fixtures")
     engine.startup
     c_repo = engine.customer_repository
@@ -57,5 +57,18 @@ class TestCustomer < Minitest::Test
                             "2012-03-27 14:54:09 UTC",
                             c_repo)
     assert_equal Invoice, customer.invoices.class
+  end
+
+  def test_invoices_method_returns_nil_if_no_matches
+    engine = SalesEngine.new("./data/fixtures")
+    engine.startup
+    c_repo = engine.customer_repository
+    customer = Customer.new("77",
+                            "Joey",
+                            "Ondricka",
+                            "2012-03-27 14:54:09 UTC",
+                            "2012-03-27 14:54:09 UTC",
+                            c_repo)
+    assert_equal nil, customer.invoices
   end
 end
