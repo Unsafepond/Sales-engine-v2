@@ -13,11 +13,36 @@ class Merchant
     @merchant_repo = merchant_repo
   end
 
+  def sales_engine
+    merchant_repo.sales_engine
+  end
+
   def items
-    merchant_repo.sales_engine.item_repository.find_all_by_merchant_id(id)
+    sales_engine.item_repository.find_all_by_merchant_id(id)
   end
 
   def invoices
-    merchant_repo.sales_engine.invoice_repository.find_all_by_merchant_id(id)
+    sales_engine.invoice_repository.find_all_by_merchant_id(id)
   end
+
+  def all_transactions
+    invoices.flat_map do |invoice|
+      sales_engine.transaction_repository.find_all_by_invoice_id(invoice.id)
+    end
+  end
+
+  def successful_transactions
+    all_transactions.map {|transaction| transaction if transaction.success?}
+  end
+
+  def revenue
+    successful_transactions
+  end
+
+  # have Merchant
+  # get all invoices for that Merchant
+  # find successful transactions for those invoices
+  # take all successful transactions and collect those invoices
+  # for each invoice id find quanity * price
+  # add all results
 end

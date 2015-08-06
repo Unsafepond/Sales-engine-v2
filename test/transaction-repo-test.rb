@@ -65,7 +65,7 @@ class TestTransactionRepository < Minitest::Test
     headers: true, header_converters: :symbol
     t_repo = TransactionRepository.new(data)
     assert_equal Transaction, t_repo.all.first.class
-  end  
+  end
   def test_random_method
     data = CSV.read "./data/fixtures/transactions.csv",
     headers: true, header_converters: :symbol
