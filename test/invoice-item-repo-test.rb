@@ -22,7 +22,7 @@ class TestInvoiceItemRepository < Minitest::Test
     data = CSV.read "./data/fixtures/invoice_items.csv",
     headers: true, header_converters: :symbol
     i_i_repo = InvoiceItemRepository.new(data)
-    assert_equal "539", i_i_repo.make_invoice_items.first.item_id
+    assert_equal "529", i_i_repo.make_invoice_items.first.item_id
   end
 
   def test_we_can_make_invoice_item_invoice_id_with_table
@@ -50,21 +50,23 @@ class TestInvoiceItemRepository < Minitest::Test
     data = CSV.read "./data/fixtures/invoice_items.csv",
     headers: true, header_converters: :symbol
     i_i_repo = InvoiceItemRepository.new(data)
-    assert_equal "2012-03-27 14:54:09 UTC", i_i_repo.make_invoice_items.last.created_at
+    assert_equal "2012-03-27 14:54:09 UTC",
+    i_i_repo.make_invoice_items.last.created_at
   end
 
   def test_we_can_make_invoice_item_update_time_with_table
     data = CSV.read "./data/fixtures/invoice_items.csv",
     headers: true, header_converters: :symbol
     i_i_repo = InvoiceItemRepository.new(data)
-    assert_equal "2012-03-27 14:54:09 UTC", i_i_repo.make_invoice_items.last.updated_at
+    assert_equal "2012-03-27 14:54:09 UTC",
+    i_i_repo.make_invoice_items.last.updated_at
   end
 
   def test_all_method
     data = CSV.read "./data/fixtures/invoice_items.csv",
     headers: true, header_converters: :symbol
     i_i_repo = InvoiceItemRepository.new(data)
-    assert_equal InvoiceItem, i_i_repo.all.first.class
+    assert_equal "5", i_i_repo.all.last.id
   end
 
   def test_random_method
@@ -85,7 +87,7 @@ class TestInvoiceItemRepository < Minitest::Test
     data = CSV.read "./data/fixtures/invoice_items.csv",
     headers: true, header_converters: :symbol
     i_i_repo = InvoiceItemRepository.new(data)
-    assert_equal InvoiceItem, i_i_repo.find_by_item_id("539").class
+    assert_equal "1", i_i_repo.find_by_item_id("529").id
   end
 
   def test_find_by_invoice_id_method
@@ -113,14 +115,16 @@ class TestInvoiceItemRepository < Minitest::Test
     data = CSV.read "./data/fixtures/invoice_items.csv",
     headers: true, header_converters: :symbol
     i_i_repo = InvoiceItemRepository.new(data)
-    assert_equal InvoiceItem, i_i_repo.find_by_created_at("2012-03-27 14:54:09 UTC").class
+    assert_equal InvoiceItem,
+    i_i_repo.find_by_created_at("2012-03-27 14:54:09 UTC").class
   end
 
   def test_find_by_updated_at_method
     data = CSV.read "./data/fixtures/invoice_items.csv",
     headers: true, header_converters: :symbol
     i_i_repo = InvoiceItemRepository.new(data)
-    assert_equal InvoiceItem, i_i_repo.find_by_updated_at("2012-03-27 14:54:09 UTC").class
+    assert_equal InvoiceItem,
+    i_i_repo.find_by_updated_at("2012-03-27 14:54:09 UTC").class
   end
 
   def test_find_all_by_id_method
@@ -134,7 +138,7 @@ class TestInvoiceItemRepository < Minitest::Test
     data = CSV.read "./data/fixtures/invoice_items.csv",
     headers: true, header_converters: :symbol
     i_i_repo = InvoiceItemRepository.new(data)
-    assert_equal "1", i_i_repo.find_all_by_item_id("539").first.id
+    assert_equal "1", i_i_repo.find_all_by_item_id("529").first.id
   end
 
   def test_find_all_by_invoice_id_method
@@ -155,20 +159,22 @@ class TestInvoiceItemRepository < Minitest::Test
     data = CSV.read "./data/fixtures/invoice_items.csv",
     headers: true, header_converters: :symbol
     i_i_repo = InvoiceItemRepository.new(data)
-    assert_equal "4", i_i_repo.find_all_by_unit_price("2196").first.id
+    assert_equal "5", i_i_repo.find_all_by_unit_price("2196").first.id
   end
 
   def test_find_all_by_created_at_method
     data = CSV.read "./data/fixtures/invoice_items.csv",
     headers: true, header_converters: :symbol
     i_i_repo = InvoiceItemRepository.new(data)
-    assert_equal InvoiceItem, i_i_repo.find_all_by_created_at("2012-03-27 14:54:09 UTC").first.class
+    assert_equal "1",
+    i_i_repo.find_all_by_created_at("2012-03-27 14:54:09 UTC").first.id
   end
 
   def test_find_all_by_updated_at_method
     data = CSV.read "./data/fixtures/invoice_items.csv",
     headers: true, header_converters: :symbol
     i_i_repo = InvoiceItemRepository.new(data)
-    assert_equal InvoiceItem, i_i_repo.find_all_by_updated_at("2012-03-27 14:54:09 UTC").first.class
+    assert_equal "1",
+    i_i_repo.find_all_by_updated_at("2012-03-27 14:54:09 UTC").first.id
   end
 end
