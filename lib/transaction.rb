@@ -6,7 +6,7 @@ class Transaction
               :result,
               :created_at,
               :updated_at,
-              :transaction_repo
+              :transaction_repository
 
   def initialize(id,
                  invoice_id,
@@ -15,7 +15,7 @@ class Transaction
                  result,
                  created_at,
                  updated_at,
-                 transaction_repo = "")
+                 transaction_repository = "")
     @id = id
     @invoice_id = invoice_id
     @credit_card_number = credit_card_number
@@ -23,11 +23,11 @@ class Transaction
     @result = result
     @created_at = created_at
     @updated_at = updated_at
-    @transaction_repo = transaction_repo
+    @transaction_repository = transaction_repository
   end
 
   def invoice
-    transaction_repo.sales_engine.invoice_repository.find_by_id(invoice_id)
+    transaction_repository.find_by_invoice_id(invoice_id)
   end
 
   def success?

@@ -66,4 +66,8 @@ class CustomerRepository
   def find_all_by_updated_at(updated_date)
     all.select {|customer| customer.updated_at == updated_date}
   end
+
+  def find_all_invoices_by_id(id)
+    sales_engine.find_all_invoices_by_id(id)
+  end
 end

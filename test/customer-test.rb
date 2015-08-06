@@ -56,7 +56,7 @@ class TestCustomer < Minitest::Test
                             "2012-03-27 14:54:09 UTC",
                             "2012-03-27 14:54:09 UTC",
                             c_repo)
-    assert_equal Invoice, customer.invoices.class
+    assert_equal Invoice, customer.invoices.first.class
   end
 
   def test_invoices_method_returns_nil_if_no_matches
@@ -69,6 +69,6 @@ class TestCustomer < Minitest::Test
                             "2012-03-27 14:54:09 UTC",
                             "2012-03-27 14:54:09 UTC",
                             c_repo)
-    assert_equal nil, customer.invoices
+    assert_equal [], customer.invoices
   end
 end
