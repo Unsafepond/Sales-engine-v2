@@ -32,16 +32,19 @@ class Merchant
   end
 
   def successful_transactions
-    all_transactions.map {|transaction| transaction if transaction.success?}
+    all_transactions.flat_map {|transaction| transaction if transaction.success?}
+  end
+
+  def successful_invoices
+    successful_transactions.flat_map do |transaction|
+      sales_engine.invoice_repository.find_all_by_id(transaction.invoice_id)
+    end
   end
 
   def revenue
-    successful_transactions
+
   end
 
-  # have Merchant
-  # get all invoices for that Merchant
-  # find successful transactions for those invoices
   # take all successful transactions and collect those invoices
   # for each invoice id find quanity * price
   # add all results

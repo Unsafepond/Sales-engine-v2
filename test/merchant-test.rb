@@ -85,7 +85,7 @@ class TestMerchant < Minitest::Test
     assert_equal [], merchant.invoices
   end
 
-  def test_revenue_method_collects_transactions
+  def test_successful_transactions_method_collects_transactions
     engine = SalesEngine.new("./data/fixtures")
     engine.startup
     m_repo = engine.merchant_repository
@@ -94,19 +94,19 @@ class TestMerchant < Minitest::Test
                             "2012-03-27 14:53:59 UTC",
                             "2012-03-27 14:53:59 UTC",
                             m_repo)
-    assert_equal 2, merchant.revenue.first.class
+    assert_equal Transaction, merchant.successful_transactions.first.class
   end
-  #
-  # def test_revenue_returns_revenue_for_a_merchant
-  #   engine = SalesEngine.new("./data/fixtures")
-  #   engine.startup
-  #   m_repo = engine.merchant_repository
-  #   merchant = Merchant.new("6",
-  #                           "Joe",
-  #                           "2012-03-27 14:53:59 UTC",
-  #                           "2012-03-27 14:53:59 UTC",
-  #                           m_repo)
-  #   assert_equal 1.00, merchant.revenue
-  # end
+
+  def test_successful_invoices_returns_invoices
+    engine = SalesEngine.new("./data/fixtures")
+    engine.startup
+    m_repo = engine.merchant_repository
+    merchant = Merchant.new("26",
+                            "Joe",
+                            "2012-03-27 14:53:59 UTC",
+                            "2012-03-27 14:53:59 UTC",
+                            m_repo)
+    assert_equal Invoice, merchant.successful_invoices.first.class
+  end
 
 end
