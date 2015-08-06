@@ -1,10 +1,11 @@
 require_relative 'customer'
 class CustomerRepository
-  attr_reader :customers, :all_customers
+  attr_reader :customers, :all_customers, :sales_engine
 
-  def initialize(csvtable)
+  def initialize(csvtable, sales_engine = "")
     @customers = csvtable
     @all_customers = make_customers
+    @sales_engine = sales_engine
   end
 
   def make_customers
@@ -13,7 +14,8 @@ class CustomerRepository
                    row[:first_name],
                    row[:last_name],
                    row[:created_at],
-                   row[:updated_at])
+                   row[:updated_at],
+                   self)
     end
   end
 
