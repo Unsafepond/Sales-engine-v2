@@ -3,39 +3,39 @@ require_relative "test_helper"
 
 class TestInvoice < Minitest::Test
   def test_invoice_has_id
-    invoice = Invoice.new(1,
-                          1,
-                          26,
+    invoice = Invoice.new("1",
+                          "1",
+                          "26",
                           "shipped",
                           "2012-03-25 09:54:09 UTC",
                           "2012-03-25 09:54:09 UTC")
-    assert_equal 1, invoice.id
+    assert_equal "1", invoice.id
   end
 
   def test_invoice_has_customer_id
-    invoice = Invoice.new(1,
-                          1,
-                          26,
+    invoice = Invoice.new("1",
+                          "1",
+                          "26",
                           "shipped",
                           "2012-03-25 09:54:09 UTC",
                           "2012-03-25 09:54:09 UTC")
-    assert_equal 1, invoice.customer_id
+    assert_equal "1", invoice.customer_id
   end
 
   def test_invoice_has_merchant_id
-    invoice = Invoice.new(1,
-                          1,
-                          26,
+    invoice = Invoice.new("1",
+                          "1",
+                          "26",
                           "shipped",
                           "2012-03-25 09:54:09 UTC",
                           "2012-03-25 09:54:09 UTC")
-    assert_equal 26, invoice.merchant_id
+    assert_equal "26", invoice.merchant_id
   end
 
   def test_invoice_has_status
-    invoice = Invoice.new(1,
-                          1,
-                          26,
+    invoice = Invoice.new("1",
+                          "1",
+                          "26",
                           "shipped",
                           "2012-03-25 09:54:09 UTC",
                           "2012-03-25 09:54:09 UTC")
@@ -43,9 +43,9 @@ class TestInvoice < Minitest::Test
   end
 
   def test_invoice_has_creation_date
-    invoice = Invoice.new(1,
-                          1,
-                          26,
+    invoice = Invoice.new("1",
+                          "1",
+                          "26",
                           "shipped",
                           "2012-03-25 09:54:09 UTC",
                           "2012-03-25 09:54:09 UTC")
