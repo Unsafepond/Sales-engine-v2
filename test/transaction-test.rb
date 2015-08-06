@@ -43,4 +43,12 @@ class TestTransaction < Minitest::Test
     transaction = Transaction.new("4", "1", "1", "3", "2196", "2012-03-27 14:54:09 UTC", "2012-03-27 14:54:09 UTC", t_repo)
     assert_equal Invoice, transaction.invoice.class
   end
+
+  def test_invocie_method_returns_nil_if_no_matches
+    engine = SalesEngine.new("./data/fixtures")
+    engine.startup
+    t_repo = engine.transaction_repository
+    transaction = Transaction.new("4", "777", "1", "3", "2196", "2012-03-27 14:54:09 UTC", "2012-03-27 14:54:09 UTC", t_repo)
+    assert_equal nil, transaction.invoice
+  end
 end
