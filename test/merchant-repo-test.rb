@@ -116,4 +116,19 @@ class TestMerchantRepository < Minitest::Test
     merch_repo.find_all_by_updated_at("2012-03-27 14:53:59 UTC").first.id
   end
 
+  def test_find_all_by_updated_at_method
+    data = CSV.read "./data/fixtures/merchants.csv",
+    headers: true, header_converters: :symbol
+    merch_repo = MerchantRepository.new(data)
+    assert_equal "1",
+    merch_repo.find_all_by_updated_at("2012-03-27 14:53:59 UTC").first.id
+  end
+
+  def test_all_transactions_contains_invoices
+    data = CSV.read "./data/fixtures/merchants.csv",
+    headers: true, header_converters: :symbol
+    merch_repo = MerchantRepository.new(data)
+    assert_equal "1", merch_repo.all_transactions("1").first.id
+  end
+
 end

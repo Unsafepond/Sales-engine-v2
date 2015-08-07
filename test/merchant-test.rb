@@ -109,7 +109,7 @@ class TestMerchant < Minitest::Test
     assert_equal Invoice, merchant.successful_invoices.first.class
   end
 
-  def test_successful_invoices_returns_nil_if_no_match
+  def test_successful_invoices_returns_empty_array_if_no_match
     engine = SalesEngine.new("./data/fixtures")
     engine.startup
     m_repo = engine.merchant_repository
@@ -121,15 +121,27 @@ class TestMerchant < Minitest::Test
     assert_equal [], merchant.successful_invoices
   end
 
-  def test_successful_invoice_items_returns_invoice_items
-    engine = SalesEngine.new("./data/fixtures")
-    engine.startup
-    m_repo = engine.merchant_repository
-    merchant = Merchant.new("26",
-                            "Joe",
-                            "2012-03-27 14:53:59 UTC",
-                            "2012-03-27 14:53:59 UTC",
-                            m_repo)
-    assert_equal InvoiceItem, merchant.successful_invoice_items.first.class
-  end
+#   def test_successful_invoice_items_returns_invoice_items
+#     engine = SalesEngine.new("./data/fixtures")
+#     engine.startup
+#     m_repo = engine.merchant_repository
+#     merchant = Merchant.new("26",
+#                             "Joe",
+#                             "2012-03-27 14:53:59 UTC",
+#                             "2012-03-27 14:53:59 UTC",
+#                             m_repo)
+#     assert_equal InvoiceItem, merchant.successful_invoice_items.first.class
+#   end
+#
+#   def test_revenue_collects_transactions_by_invoice_id
+#     engine = SalesEngine.new("./data/fixtures")
+#     engine.startup
+#     m_repo = engine.merchant_repository
+#     merchant = Merchant.new("26",
+#                             "Joe",
+#                             "2012-03-27 14:53:59 UTC",
+#                             "2012-03-27 14:53:59 UTC",
+#                             m_repo)
+#     assert_equal InvoiceItem, merchant.successful_transactions
+#   end
 end

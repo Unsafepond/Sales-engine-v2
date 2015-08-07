@@ -65,4 +65,11 @@ class MerchantRepository
   def find_all_invoices_by_merchant_id(id)
     sales_engine.find_all_invoices_by_merchant_id(id)
   end
+
+  def all_transactions(invoice_id)
+      sales_engine.all_transactions(invoice_id)
+  end
+  def find_all_invoices_by_invoice_id(id)
+    sales_engine.find_all_invoices_by_id(id)
+  end
 end
