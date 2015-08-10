@@ -22,7 +22,7 @@ class Customer
   end
 
   def invoices
-    customer_repository.find_all_invoices_by_id(id)
+    customer_repository.find_all_invoices_by_customer_id(id)
   end
 
   def transactions
@@ -37,7 +37,7 @@ class Customer
 
   def successful_invoices
     successful_transactions.flat_map do |transaction|
-      customer_repository.find_all_invoices_by_id(transaction.invoice_id)
+      customer_repository.find_all_invoices_by_invoice_id(transaction.invoice_id)
     end
   end
 
@@ -49,8 +49,11 @@ class Customer
     successful_merchant_ids.inject(Hash.new(0)) { |k, v| k[v] += 1; k}
   end
 
+  def sort_merchant_ids
+    count_merchant_ids.sort_by {|k,v| -v}
+  end
+
   def favorite_merchant
-    # find duplicate merchant ids
-    # return the merchant with most duplicate ids
+    customer_repository.find_merchant_by_merchant_id(sort_merchant_ids.first[0])
   end
 end
