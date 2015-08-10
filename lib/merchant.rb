@@ -1,3 +1,5 @@
+require "bigdecimal"
+
 class Merchant
   attr_reader :id,
               :name,
@@ -36,14 +38,28 @@ class Merchant
       merchant_repository.find_all_invoices_by_invoice_id(transaction.invoice_id)
     end
   end
-  #
-  # def successful_invoice_items
-  #   successful_invoices.flat_map do |invoice|
-  #     sales_engine.invoice_item_repository.find_all_by_invoice_id(invoice.id)
-  #   end
-  # end
-  # #
-  # # take all successful transactions and collect those invoices
-  # # for each invoice id find quanity * price
-  # # add all results
+
+  def successful_invoice_items
+    successful_invoices.flat_map do |invoice|
+      merchant_repository.find_all_invoice_items_by_invoice_id(invoice.id)
+    end
+  end
+
+  def revenue(date = nil)
+    if date
+      revenue_by_date(date)
+    else
+      total_revenue
+    end
+  end
+
+  def total_revenue
+    successful_invoice_items.flat_map do |invoice_item|
+     (invoice_item.unit_price * invoice_item.quantity)
+   end.inject(:+)
+ end
+
+ def revenue_by_date(date)
+
+ end
 end

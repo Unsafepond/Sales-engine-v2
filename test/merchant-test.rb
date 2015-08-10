@@ -121,27 +121,42 @@ class TestMerchant < Minitest::Test
     assert_equal [], merchant.successful_invoices
   end
 
-#   def test_successful_invoice_items_returns_invoice_items
-#     engine = SalesEngine.new("./data/fixtures")
-#     engine.startup
-#     m_repo = engine.merchant_repository
-#     merchant = Merchant.new("26",
-#                             "Joe",
-#                             "2012-03-27 14:53:59 UTC",
-#                             "2012-03-27 14:53:59 UTC",
-#                             m_repo)
-#     assert_equal InvoiceItem, merchant.successful_invoice_items.first.class
-#   end
-#
-#   def test_revenue_collects_transactions_by_invoice_id
-#     engine = SalesEngine.new("./data/fixtures")
-#     engine.startup
-#     m_repo = engine.merchant_repository
-#     merchant = Merchant.new("26",
-#                             "Joe",
-#                             "2012-03-27 14:53:59 UTC",
-#                             "2012-03-27 14:53:59 UTC",
-#                             m_repo)
-#     assert_equal InvoiceItem, merchant.successful_transactions
-#   end
+  def test_successful_invoice_items_returns_invoice_items
+    engine = SalesEngine.new("./data/fixtures")
+    engine.startup
+    m_repo = engine.merchant_repository
+    merchant = Merchant.new("26",
+                            "Joe",
+                            "2012-03-27 14:53:59 UTC",
+                            "2012-03-27 14:53:59 UTC",
+                            m_repo)
+    assert_equal InvoiceItem, merchant.successful_invoice_items.first.class
+  end
+
+  def test_total_revenue
+    engine = SalesEngine.new("./data/fixtures")
+    engine.startup
+    m_repo = engine.merchant_repository
+    merchant = Merchant.new("26",
+                            "Joe",
+                            "2012-03-27 14:53:59 UTC",
+                            "2012-03-27 14:53:59 UTC",
+                            m_repo)
+    assert_equal 2780.91, merchant.revenue
+    assert_equal BigDecimal, merchant.revenue.class
+  end
+
+  def test_revenue_by_date
+    skip
+    engine = SalesEngine.new("./data/fixtures")
+    engine.startup
+    m_repo = engine.merchant_repository
+    merchant = Merchant.new("26",
+                            "Joe",
+                            "2012-03-27 14:53:59 UTC",
+                            "2012-03-27 14:53:59 UTC",
+                            m_repo)
+    assert_equal 2780.91, merchant.revenue
+    assert_equal BigDecimal, merchant.revenue.class
+  end
 end
