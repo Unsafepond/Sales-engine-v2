@@ -143,11 +143,9 @@ class TestMerchant < Minitest::Test
                             "2012-03-27 14:53:59 UTC",
                             m_repo)
     assert_equal 2780.91, merchant.revenue
-    assert_equal BigDecimal, merchant.revenue.class
   end
 
-  def test_revenue_by_date
-    skip
+  def test_revenue_is_a_big_decimal
     engine = SalesEngine.new("./data/fixtures")
     engine.startup
     m_repo = engine.merchant_repository
@@ -156,7 +154,19 @@ class TestMerchant < Minitest::Test
                             "2012-03-27 14:53:59 UTC",
                             "2012-03-27 14:53:59 UTC",
                             m_repo)
-    assert_equal 2780.91, merchant.revenue
     assert_equal BigDecimal, merchant.revenue.class
   end
+
+  def test_revenue_by_date
+    engine = SalesEngine.new("./data/fixtures")
+    engine.startup
+    m_repo = engine.merchant_repository
+    merchant = Merchant.new("26",
+                            "Joe",
+                            "2012-03-27 14:53:59 UTC",
+                            "2012-03-27 14:53:59 UTC",
+                            m_repo)
+    assert_equal 2099.16, merchant.revenue("2012-03-12 05:54:09 UTC")
+  end
+
 end

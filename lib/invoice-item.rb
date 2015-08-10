@@ -33,4 +33,5 @@ class InvoiceItem
   def item
     invoice_item_repository.find_by_item_id(item_id)
   end
+
 end

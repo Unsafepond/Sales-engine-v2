@@ -45,6 +45,18 @@ class Merchant
     end
   end
 
+  def successful_invoice_items_by_date(date)
+    successful_invoices_by_date(date).flat_map do |invoice|
+      merchant_repository.find_all_invoice_items_by_invoice_id(invoice.id)
+    end
+  end
+
+  def successful_invoices_by_date(date)
+    successful_invoices.select do |invoice|
+      invoice.created_at == date
+    end
+  end
+
   def revenue(date = nil)
     if date
       revenue_by_date(date)
@@ -60,6 +72,8 @@ class Merchant
  end
 
  def revenue_by_date(date)
-
+    successful_invoice_items_by_date(date).flat_map do |invoice_item|
+      (invoice_item.unit_price * invoice_item.quantity)
+    end.inject(:+)
  end
 end
