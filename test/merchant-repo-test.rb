@@ -1,7 +1,4 @@
-require 'minitest/autorun'
-require 'minitest/pride'
-require 'csv'
-require './lib/merchant-repo'
+require "./test/test_helper"
 
 class TestMerchantRepository < Minitest::Test
   def test_we_can_initialize_merchants
@@ -125,10 +122,16 @@ class TestMerchantRepository < Minitest::Test
   end
 
   def test_all_transactions_contains_invoices
-    data = CSV.read "./data/fixtures/merchants.csv",
-    headers: true, header_converters: :symbol
-    merch_repo = MerchantRepository.new(data)
+    engine = SalesEngine.new("./data/fixtures")
+    merch_repo = engine.merchant_repository
     assert_equal "1", merch_repo.all_transactions("1").first.id
+  end
+
+  def test_all_revenue_returns_hash_of_merchants_and_revenue
+    engine = SalesEngine.new("./data/fixtures")
+    merch_repo = engine.merchant_repository
+
+    assert_equal "", merch_repo.all_revenue
   end
 
 end

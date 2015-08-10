@@ -67,12 +67,23 @@ class MerchantRepository
   end
 
   def all_transactions(invoice_id)
-      sales_engine.all_transactions(invoice_id)
+    sales_engine.all_transactions(invoice_id)
   end
+
   def find_all_invoices_by_invoice_id(id)
-    sales_engine.find_all_invoices_by_id(id)
+    sales_engine.find_all_invoices_by_invoice_id(id)
   end
+
   def find_all_invoice_items_by_invoice_id(id)
     sales_engine.find_all_invoice_items_by_id(id)
+  end
+
+  def all_revenue
+    all.group_by {|merchant| merchant.revenue}
+  end
+
+  def most_revenue(x = 1)
+    x = x.to_i
+    all_revenue.sort_by { |k, v| -v}[0..(x-1)]
   end
 end
