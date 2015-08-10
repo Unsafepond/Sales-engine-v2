@@ -140,5 +140,6 @@ class TestCustomer < Minitest::Test
                             "2012-03-27 14:54:09 UTC",
                             c_repo)
     assert_equal 2, customer.count_merchant_ids["26"]
+    assert_equal Hash, customer.count_merchant_ids.class
   end
 end
