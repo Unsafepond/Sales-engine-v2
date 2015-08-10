@@ -1,4 +1,4 @@
-class Transaction
+ class Transaction
   attr_reader :id,
               :invoice_id,
               :credit_card_number,
