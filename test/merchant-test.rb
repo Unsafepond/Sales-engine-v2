@@ -168,5 +168,16 @@ class TestMerchant < Minitest::Test
                             m_repo)
     assert_equal 2099.16, merchant.revenue("2012-03-12 05:54:09 UTC")
   end
+  def test_revenue_by_date_is_a_bigdecimal_object
+    engine = SalesEngine.new("./data/fixtures")
+    engine.startup
+    m_repo = engine.merchant_repository
+    merchant = Merchant.new("26",
+                            "Joe",
+                            "2012-03-27 14:53:59 UTC",
+                            "2012-03-27 14:53:59 UTC",
+                            m_repo)
+    assert_equal BigDecimal, merchant.revenue("2012-03-12 05:54:09 UTC").class
+  end
 
 end
