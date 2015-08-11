@@ -56,7 +56,7 @@ class TestCustomer < Minitest::Test
                             "2012-03-27 14:54:09 UTC",
                             "2012-03-27 14:54:09 UTC",
                             c_repo)
-    assert_equal Invoice, customer.invoices.first.class
+    assert_equal 4, customer.invoices.count
   end
 
   def test_invoices_method_returns_nil_if_no_matches
@@ -70,5 +70,19 @@ class TestCustomer < Minitest::Test
                             "2012-03-27 14:54:09 UTC",
                             c_repo)
     assert_equal [], customer.invoices
+  end
+
+  def test_transactions_method_returns_transactions
+    engine = SalesEngine.new("./data/fixtures")
+    engine.startup
+    c_repo = engine.customer_repository
+    customer = Customer.new("1",
+                            "Joey",
+                            "Ondricka",
+                            "2012-03-27 14:54:09 UTC",
+                            "2012-03-27 14:54:09 UTC",
+                            c_repo)
+    assert_equal 3, customer.transactions.count
+    assert_equal Transaction, customer.transactions.first.class
   end
 end
