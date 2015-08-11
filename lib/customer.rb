@@ -58,10 +58,7 @@ class Customer
   end
 
   def favorite_merchant
-    #look at their merchant ids
-    #sort by the number of appearances
-    #get their invoices
-    #get those invoices' merchants
+    sorted_merchants.first
   end
 
 end

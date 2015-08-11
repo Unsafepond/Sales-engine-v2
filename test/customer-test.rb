@@ -168,9 +168,20 @@ class TestCustomer < Minitest::Test
                             "2012-03-27 14:54:09 UTC",
                             "2012-03-27 14:54:09 UTC",
                             c_repo)
-    assert_equal "Higgs Boson", customer.sorted_merchants.first.name
+    assert_equal "EA Sucks", customer.sorted_merchants[2].name
     assert_equal 2, customer.sorted_merchants[1]
   end
 
-
+  def test_we_can_count_number_of_each_merchants_appearances
+    engine = SalesEngine.new("./data/fixtures")
+    engine.startup
+    c_repo = engine.customer_repository
+    customer = Customer.new("1",
+                            "Joey",
+                            "Ondricka",
+                            "2012-03-27 14:54:09 UTC",
+                            "2012-03-27 14:54:09 UTC",
+                            c_repo)
+    assert_equal "Higgs Boson", customer.favorite_merchant.name
+  end
 end
