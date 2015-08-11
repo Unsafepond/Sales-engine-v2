@@ -35,8 +35,13 @@ class Customer
     transactions.select {|transaction| transaction.success?}
   end
 
+  def successful_invoices
+    successful_transactions.flat_map do |transaction|
+      customer_repository.find_all_invoices_by_invoice_id(transaction.invoice_id)
+    end
+  end
+
   def favorite_merchant
-    # get successful transactions
     #look at their merchant ids
     #sort by the number of appearances
     #get their invoices

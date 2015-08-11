@@ -89,9 +89,11 @@ class SalesEngine
   def all_transactions(invoice_id)
     transaction_repository.find_all_by_invoice_id(invoice_id)
   end
+
   def find_all_invoices_by_invoice_id(id)
     invoice_repository.find_all_by_id(id)
   end
+  
   def find_all_invoice_items_by_id(id)
     invoice_item_repository.find_all_by_id(id)
   end

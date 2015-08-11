@@ -99,7 +99,7 @@ class TestCustomer < Minitest::Test
     assert_equal 0, customer.transactions.count
   end
 
-  def test_successful_transactions
+  def test_successful_transactions_returns_only_successful_transactions
     engine = SalesEngine.new("./data/fixtures")
     engine.startup
     c_repo = engine.customer_repository
@@ -111,6 +111,23 @@ class TestCustomer < Minitest::Test
                             c_repo)
     assert_equal 3, customer.successful_transactions.count
     assert_equal Transaction, customer.successful_transactions.first.class
+    refute_equal 'failed', customer.successful_transactions.any? do |transacton|
+      transaction.result
+    end
+  end
+
+  def test_successful_invoices_returns_invoices_with_successful_transactions
+    engine = SalesEngine.new("./data/fixtures")
+    engine.startup
+    c_repo = engine.customer_repository
+    customer = Customer.new("1",
+                            "Joey",
+                            "Ondricka",
+                            "2012-03-27 14:54:09 UTC",
+                            "2012-03-27 14:54:09 UTC",
+                            c_repo)
+    assert_equal 3, customer.successful_invoices.count
+    assert_equal "4", customer.successful_invoices.last.id
   end
 
 end
