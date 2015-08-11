@@ -41,6 +41,12 @@ class Customer
     end
   end
 
+  def all_successful_merchants
+    successful_invoices.flat_map do |invoice|
+      customer_repository.find_all_merchants_by_merchant_id(invoice.merchant_id)
+    end
+  end
+
   def favorite_merchant
     #look at their merchant ids
     #sort by the number of appearances

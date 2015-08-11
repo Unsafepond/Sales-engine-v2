@@ -130,4 +130,18 @@ class TestCustomer < Minitest::Test
     assert_equal "4", customer.successful_invoices.last.id
   end
 
+  def test_some_method_finds_all_merchants_with_successful_invoices
+    engine = SalesEngine.new("./data/fixtures")
+    engine.startup
+    c_repo = engine.customer_repository
+    customer = Customer.new("1",
+                            "Joey",
+                            "Ondricka",
+                            "2012-03-27 14:54:09 UTC",
+                            "2012-03-27 14:54:09 UTC",
+                            c_repo)
+    assert_equal "Higgs Boson", customer.all_successful_merchants.first.name
+    assert_equal "EA Sucks", customer.all_successful_merchants.last.name
+  end
+
 end
