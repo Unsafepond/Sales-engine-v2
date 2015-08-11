@@ -85,4 +85,17 @@ class TestCustomer < Minitest::Test
     assert_equal 3, customer.transactions.count
     assert_equal Transaction, customer.transactions.first.class
   end
+
+  def test_transactions_method_returns_0_if_customer_has_no_transactions
+    engine = SalesEngine.new("./data/fixtures")
+    engine.startup
+    c_repo = engine.customer_repository
+    customer = Customer.new("99",
+                            "Joey",
+                            "Ondricka",
+                            "2012-03-27 14:54:09 UTC",
+                            "2012-03-27 14:54:09 UTC",
+                            c_repo)
+    assert_equal 0, customer.transactions.count
+  end
 end
