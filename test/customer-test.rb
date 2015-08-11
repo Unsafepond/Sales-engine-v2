@@ -82,7 +82,7 @@ class TestCustomer < Minitest::Test
                             "2012-03-27 14:54:09 UTC",
                             "2012-03-27 14:54:09 UTC",
                             c_repo)
-    assert_equal 3, customer.transactions.count
+    assert_equal 4, customer.transactions.count
     assert_equal Transaction, customer.transactions.first.class
   end
 
@@ -98,4 +98,19 @@ class TestCustomer < Minitest::Test
                             c_repo)
     assert_equal 0, customer.transactions.count
   end
+
+  def test_successful_transactions
+    engine = SalesEngine.new("./data/fixtures")
+    engine.startup
+    c_repo = engine.customer_repository
+    customer = Customer.new("1",
+                            "Joey",
+                            "Ondricka",
+                            "2012-03-27 14:54:09 UTC",
+                            "2012-03-27 14:54:09 UTC",
+                            c_repo)
+    assert_equal 3, customer.successful_transactions.count
+    assert_equal Transaction, customer.successful_transactions.first.class
+  end
+
 end

@@ -31,5 +31,16 @@ class Customer
     end
   end
 
-  
+  def successful_transactions
+    transactions.select {|transaction| transaction.success?}
+  end
+
+  def favorite_merchant
+    # get successful transactions
+    #look at their merchant ids
+    #sort by the number of appearances
+    #get their invoices
+    #get those invoices' merchants
+  end
+
 end
