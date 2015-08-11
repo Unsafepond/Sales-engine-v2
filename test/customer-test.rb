@@ -130,7 +130,7 @@ class TestCustomer < Minitest::Test
     assert_equal "4", customer.successful_invoices.last.id
   end
 
-  def test_some_method_finds_all_merchants_with_successful_invoices
+  def test_all_successful_merchants_finds_all_merchants_with_successful_invoices
     engine = SalesEngine.new("./data/fixtures")
     engine.startup
     c_repo = engine.customer_repository
@@ -140,8 +140,37 @@ class TestCustomer < Minitest::Test
                             "2012-03-27 14:54:09 UTC",
                             "2012-03-27 14:54:09 UTC",
                             c_repo)
-    assert_equal "Higgs Boson", customer.all_successful_merchants.first.name
+    assert_equal "Higgs Boson", customer.all_successful_merchants[0].name
+    assert_equal "Higgs Boson", customer.all_successful_merchants[1].name
     assert_equal "EA Sucks", customer.all_successful_merchants.last.name
   end
+
+  def test_we_can_count_number_of_each_merchants_appearances
+    engine = SalesEngine.new("./data/fixtures")
+    engine.startup
+    c_repo = engine.customer_repository
+    customer = Customer.new("1",
+                            "Joey",
+                            "Ondricka",
+                            "2012-03-27 14:54:09 UTC",
+                            "2012-03-27 14:54:09 UTC",
+                            c_repo)
+    assert_equal "Higgs Boson", customer.merchant_appearances.first.first.name
+  end
+
+  def test_we_can_count_number_of_each_merchants_appearances
+    engine = SalesEngine.new("./data/fixtures")
+    engine.startup
+    c_repo = engine.customer_repository
+    customer = Customer.new("1",
+                            "Joey",
+                            "Ondricka",
+                            "2012-03-27 14:54:09 UTC",
+                            "2012-03-27 14:54:09 UTC",
+                            c_repo)
+    assert_equal "Higgs Boson", customer.sorted_merchants.first.name
+    assert_equal 2, customer.sorted_merchants[1]
+  end
+
 
 end

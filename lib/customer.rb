@@ -47,6 +47,16 @@ class Customer
     end
   end
 
+  def merchant_appearances
+    all_successful_merchants.each_with_object(Hash.new(0)) do |merchant, counts|
+      counts[merchant] += 1
+    end
+  end
+
+  def sorted_merchants
+    merchant_appearances.sort_by {|k, v| -v}.flatten
+  end
+
   def favorite_merchant
     #look at their merchant ids
     #sort by the number of appearances
